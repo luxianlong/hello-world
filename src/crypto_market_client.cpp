@@ -176,11 +176,9 @@ std::vector<CryptoCandle> BinanceMarketDataClient::getLastHourBtcUsdtCandles() c
     using namespace std::chrono;
     const auto end_time = duration_cast<milliseconds>(
         system_clock::now().time_since_epoch()).count();
-    const auto start_time = end_time - duration_cast<milliseconds>(hours(1)).count();
     const auto url = std::string("https://api.binance.com/api/v3/klines") +
-                     "?symbol=BTCUSDT&interval=1m&startTime=" +
-                     std::to_string(start_time) + "&endTime=" +
-                     std::to_string(end_time) + "&limit=1000";
+                     "?symbol=BTCUSDT&interval=1m&endTime=" +
+                     std::to_string(end_time) + "&limit=1";
 
     auto* curl = initializeCurl();
     struct CurlCleanup {
